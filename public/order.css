@@ -1,0 +1,206 @@
+/* ==========================
+   ORDERS PAGE
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+    text-decoration: none ;
+}
+:root{
+     --primary-color: #3b141c;
+      --secondry-color: #f3961c;
+}
+
+body{
+    background:#f7f3ef;
+}
+
+header{
+    background: var(--primary-color);
+    padding:18px;
+    text-decoration: none;
+}
+
+.navbar{
+    display:flex;
+    justify-content:center;
+}
+
+.logo-text{
+    color:#fff;
+    text-decoration:none;
+    font-size:28px;
+}
+
+.cart-container{
+
+    width:90%;
+    max-width:1100px;
+
+    margin:40px auto;
+
+    background:#fff;
+
+    padding:30px;
+
+    border-radius:12px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+}
+
+.section-title{
+
+    text-align:center;
+
+    color: var(--primary-color);
+
+    margin-bottom:25px;
+
+}
+
+.cart-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.cart-table th{
+
+    background:var(--primary-color);
+
+    color:white;
+
+    padding:15px;
+
+}
+
+.cart-table td{
+
+    padding:14px;
+
+    border-bottom:1px solid #ddd;
+
+    text-align:center;
+
+}
+
+.cart-table tr:hover{
+
+    background:#f4ece6;
+
+}
+
+.cancel-btn{
+
+    background:#dc3545;
+
+    color:white;
+
+    border:none;
+
+    padding:8px 15px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+}
+
+.cancel-btn:hover{
+
+    background:#b52a37;
+
+}
+
+.orders-buttons{
+
+    text-align:center;
+
+    margin-top:30px;
+
+}
+
+.back-home-btn{
+
+    text-decoration:none;
+
+    background:var(--primary-color);
+
+    color:white;
+
+    padding:12px 25px;
+
+    border-radius:8px;
+
+    transition:.3s;
+
+}
+
+.back-home-btn:hover{
+
+    background: var(--secondry-color);
+
+}
+
+@media(max-width:768px){
+
+.cart-table{
+
+    font-size:14px;
+
+}
+
+.cart-container{
+
+    width:95%;
+
+}
+
+}
+.status{
+
+    padding:8px 16px;
+
+    border-radius:20px;
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+}
+
+.pending{
+
+    background:#f39c12;
+
+}
+.status{
+    padding:8px 18px;
+    border-radius:30px;
+    color:white;
+    font-weight:bold;
+}
+
+.status.pending{
+    background:#f39c12;
+}
+
+.status.preparing{
+    background:#3498db;
+}
+
+.status.delivered{
+    background:#2ecc71;
+}
+
+.status.cancelled{
+    background:#e74c3c;
+}

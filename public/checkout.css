@@ -1,0 +1,87 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+:root{
+         --primary-color: #3b141c;
+      --secondry-color: #f3961c;
+}
+
+body{
+    background:#f8f5f2;
+}
+
+h1{
+    text-align:center;
+    margin-top:30px;
+    color: var(--primary-color);
+}
+
+.checkout-container{
+    width:450px;
+    background:#fff;
+    margin:40px auto;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.15);
+}
+
+.checkout-container h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:var(--primary-color);
+}
+
+#checkout-form{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+#checkout-form input,
+#checkout-form textarea{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+    outline:none;
+    transition:0.3s;
+}
+
+#checkout-form input:focus,
+#checkout-form textarea:focus{
+    border-color:#6f4e37;
+    box-shadow:0 0 8px rgba(111,78,55,.3);
+}
+
+#checkout-form textarea{
+    height:120px;
+    resize:none;
+}
+
+#checkout-form button{
+    padding:15px;
+    border:none;
+    border-radius:8px;
+    background: var(--primary-color);
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+#checkout-form button:hover{
+    background: var(--secondry-color);
+}
+
+@media(max-width:600px){
+
+.checkout-container{
+    width:95%;
+    margin:20px auto;
+}
+
+}

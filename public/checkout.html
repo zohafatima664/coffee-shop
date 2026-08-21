@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+</head>
+<link rel="stylesheet" href="checkout.css">
+<body>
+
+<h1>Checkout Page</h1>
+<section class="checkout-container">
+
+    <h2>Checkout</h2>
+
+    <form id="checkout-form">
+
+        <input
+            type="text"
+            id="customer-name"
+            placeholder="Full Name"
+            required
+        >
+
+        <input
+            type="text"
+            id="customer-phone"
+            placeholder="Phone Number"
+            required
+        >
+
+        <textarea
+            id="customer-address"
+            placeholder="Delivery Address"
+            required
+        ></textarea>
+
+        <button type="submit">
+            Place Order
+        </button>
+
+    </form>
+         <div id="order-success" style="display:none; text-align:center; margin-top:30px;">
+
+    <h2>🎉 Order Placed Successfully!</h2>
+
+    <p>Thank you for ordering from our Coffee Shop ☕</p>
+
+    <button onclick="window.location.href='index.html'">
+        🏠 Back to Home
+    </button>
+
+    <button onclick="window.location.href='orders.html'">
+        📦 My Orders
+    </button>
+
+</div>
+</section>
+
+<script src="checkout.js"></script>
+</body>
+</html>

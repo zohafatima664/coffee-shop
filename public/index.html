@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My website</title>
+    <!--link for icons(font aewsome)-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
+    <!--Swipper link with CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+   <!--for cart link-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <!--Header/navbar-->
+    <header>
+        <nav class="navbar section-content">
+        <a href="#" class="navlogo">
+            <h2 class="logo-text">☕ coffee</h2>
+            </a>
+      
+        <ul class="nav-menu">
+            <button id="menu-close-button" class="fas fa-times"></button>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Home</a>
+            </li>
+             <li class="nav-item">
+                <a href="#about" class="nav-link">About</a>
+            </li>
+             <li class="nav-item">
+                <a href="#menu" class="nav-link">Menu</a>
+            </li>
+             <li class="nav-item">
+                <a href="#testimonials" class="nav-link">Testimonials</a>
+            </li>
+             <li class="nav-item">
+                <a href="#gallery" class="nav-link">Gallery</a>
+            </li>
+             <li class="nav-item">
+                <a href="#contact" class="nav-link">Contact</a>
+            </li>
+            <li class="nav-item">
+    <a href="#ai-assistant" class="nav-link">AI Assistant 🤖</a>
+</li>
+            <li class="nav-item">
+    <a href="orders.html" class="nav-link">My Orders</a>
+           </li>
+           <li class="nav-item">
+           <a href="wishlist.html" class="nav-link">Wishlist ❤️</a>
+           </li>
+           <li class="nav-item">
+        <a href="admin.html" id="admin-link" class="nav-link" style="display:none;">
+    Admin Dashboard
+</a>
+           </li>
+           <li class="nav-item">
+    <a href="#" id="logout-btn" class="nav-link">Logout</a>
+    </li>
+<!-- </li>
+               <li class="nav-item">
+                <a href="admin.html" class="nav-link">Admin Panel</a>
+            </li> -->
+        </ul>
+           <a href="cart.html" class="cart-icon">
+    <i class="bi bi-cart3"></i>
+    <span id="cart-count">0</span>
+</a>
+        <button id="menu-open-button" class="fas fa-bars"></button>
+          </nav>
+    </header>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="section-content">
+                <div class="hero-details">
+                    <h2 class="title">Best Coffee</h2>
+                    <h3 class="description">Welcome to our coffee paradaise where every bean tells a story and every cup spark joy </h3>
+                <div class="buttons">
+                    <a href="#menu" class="button order-now">Order Now</a>
+                   <a href="#contact" class="button contact-us">Contact Us</a>
+                </div>
+                </div>
+             <div class="hero-image-wrapper">
+                <img src="./coffee-hero-section.png" alt="hero-image" class="hero-image">
+             </div>
+            </div>
+        </section>
+        <!--About Section-->
+        <section class="about-section" id="about">
+            <div class="section-content">
+                <div class="about-image-wrapper">
+                    <img src="./about-image.jpg" alt="about" class="about-image">
+                </div>
+                <div class="about-details">
+                    <h2 class="section-title">About Us</h2>
+                    <p class="text">At coffee House in Pakistan,Islamabad , we pride ourselves on being a go-to destination for coffee lovers and conversation seekers alike.we're dedicated to providing an exceptional coffee ecperience in a cozy and inviting atmosphere where guests can relax, unwind and enjoy their time in comfort. </p>
+                
+                <div class="social-link-list">
+                    <a href="#" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+                   <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                  <a href="#" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+              </div>
+            </div>
+        </section>
+        <!-- AI COFFEE ASSISTANT -->
+                <section class="ai-coffee-section" id="ai-assistant">
+
+    <h2 class="section-title">☕ AI COFFEE ASSISTANT</h2>
+
+    <p class="ai-subtitle">
+        Not sure what coffee to choose?
+        Let our AI assistant help you find the perfect drink!
+    </p>
+
+    <div class="ai-assistant-card">
+
+        <div class="ai-icon">
+            🤖☕
+        </div>
+
+        <h3>Your Coffee Assistant</h3>
+
+        <p>
+            Ask me anything about our coffee and beverages.
+        </p>
+
+        <div class="ai-input-wrapper">
+
+            <input
+                type="text"
+                id="ai-question"
+                placeholder="e.g. What should I drink in summer?"
+            >
+
+            <button id="ai-btn">
+                🤖 Ask AI
+            </button>
+
+        </div>
+
+        <div id="ai-response">
+            Your AI recommendation will appear here ☕
+        </div>
+        <div id="ai-products" class="ai-products"></div>
+
+<div id="ai-products" class="ai-products"></div>
+        <div class="ai-suggestions">
+
+            <p>Try asking:</p>
+
+            <button class="ai-suggestion-btn"
+                onclick="document.getElementById('ai-question').value='What should I drink in summer?'">
+                🧊 Summer drink
+            </button>
+
+            <button class="ai-suggestion-btn"
+                onclick="document.getElementById('ai-question').value='I like sweet coffee'">
+                🍯 Sweet coffee
+            </button>
+
+            <button class="ai-suggestion-btn"
+                onclick="document.getElementById('ai-question').value='Recommend me a coffee'">
+                ☕ Recommend coffee
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+        <!--Menu Section-->
+        <section class="menu-section" id="menu">
+        <h2 class="section-title">Our Menu</h2>
+        <div class="search-container">
+    <input
+        type="text"
+        id="product-search"
+        placeholder="🔎 Search products..."
+    >
+</div>
+            <div class="menu-content">
+                <ul class="menu-list" id="menu-list">
+                    <li class="menu-item">
+                        <img src="./hot-beverages.png" alt="Hot Beverages" class="menu-image">
+                        <div class="menu-details">
+                        <h3 class="name">Hot Beverages</h3>
+                        <p class="text">Wide range of Steaming hot coffee to make you fresh and light</p>
+<h4 class="price">$8.99</h4>
+<button class="add-cart-btn" data-name="Hot Beverages" data-price="8.99" data-image="./hot-beverages.png">Add To Cart</button>
+<button class="wishlist-btn"
+        data-name="Hot Beverages"
+        data-price="8.99">
+    ♡
+</button>
+                        </div>
+                   </li>
+                   
+                   <li class="menu-item">
+                        <img src="./cold-beverages.png" alt="Cold Beverages" class="menu-image">
+                           <div class="menu-details">
+                        <h3 class="name">Cold Beverages</h3>
+                        <p class="text">Creamy and frothy cold coffee to make you cool</p>
+<h4 class="price">$9.99</h4>
+<button class="add-cart-btn" data-name="Cold Beverages" data-price="9.99" data-image="./cold-beverages.png">Add To Cart</button>
+<button class="wishlist-btn"
+        data-name="Cold Beverages"
+        data-price="9.99">
+    ♡
+</button>
+                        </div>
+                   </li>
+                   <li class="menu-item">
+                        <img src="./refreshment.png" alt="Refreshment" class="menu-image">
+                           <div class="menu-details">
+                        <h3 class="name">Refreshment</h3>
+                        <p class="text">Fruit and icy refreshing drink to make feel refresh.</p>
+<h4 class="price">$5.11</h4>
+    <button class="add-cart-btn" data-name="Refreshment" data-price="5.11" data-image="./refreshment.png">Add To Cart</button>
+    <button class="wishlist-btn"
+        data-name="Refreshment"
+        data-price="5.11">
+    ♡
+</button>
+                        </div>
+                   </li>
+                   <li class="menu-item">
+                        <img src="./special-combo.png" alt="Special Combos" class="menu-image">
+                           <div class="menu-details">
+                        <h3 class="name">Special Combos</h3>
+                        <p class="text">Your favourite eating and drinking combinations.</p>
+<h4 class="price">$10.00</h4>
+<button class="add-cart-btn" data-name="Special Combos" data-price="10.00" data-image="./special-combo.png">Add To Cart</button>
+<button class="wishlist-btn"
+        data-name="special Combos"
+        data-price="10.00">
+    ♡
+</button>
+                   </div>
+                    </li>
+                   <li class="menu-item">
+                        <img src="./desserts.png" alt="Dessert" class="menu-image">
+                           <div class="menu-details">
+                        <h3 class="name">Desserts</h3>
+                        <p class="text">Satiate your plate and take you on a culinary treat.</p>
+<h4 class="price">$7.00</h4>
+<button class="add-cart-btn" data-name="Desserts" data-price="7.00" data-image="./desserts.png">Add To Cart</button>
+<button class="wishlist-btn"
+        data-name="Dessert"
+        data-price="7.00">
+    ♡
+</button>
+                        </div>
+                   </li>
+                   <li class="menu-item">
+                        <img src="./burger-frenchfries.png" alt="burger and french fries" class="menu-image">
+                          <div class="menu-details">
+                        <h3 class="name">Burger & French Fries</h3>
+                        <p class="text">Quick bites to satisfy your small size hunger.</p>
+<h4 class="price">$12.00</h4>
+<button class="add-cart-btn" data-name="Burger & French Fries" data-price="12.00" data-image="./burger-frenchfries.png">Add To Cart</button>
+<button class="wishlist-btn"
+        data-name="Burger & French Fries"
+        data-price="12.00">
+    ♡
+</button>
+                        </div>
+                   </li>
+                </ul>
+            </div>
+        </section>
+        <!--Testimoals-->
+        <section class="testimonials-section" id="testimonials"> 
+        <h2 class="section-title">Testimonials</h2>
+        <div class="section-content">
+            <div class="slider-container swiper">
+                <div class="slider-wrapper">
+                    <ul class="testimonials-list swiper-wrapper">
+                        <li class="testimonial swiper-slide">
+                            <img src="./user-1.jpg" alt="User" class="user-image">
+                            <h3 class="name">Zoha Fatima</h3>
+                            <i class="feedback">"Coffee lover from Islamabad. Perfactly balanced and rich. Will order again!"</i>
+                        </li>
+                            <li class="testimonial swiper-slide">
+                            <img src="./user-2.jpg" alt="User" class="user-image">
+                            <h3 class="name">Ahmed Ali</h3>
+                            <i class="feedback">"Great espresso blend! Smooth and bold flavor. Fast shipping too!"</i>
+                        </li>
+                            <li class="testimonial swiper-slide">
+                            <img src="./user-3.jpg" alt="User" class="user-image">
+                            <h3 class="name">Zayan Khan</h3>
+                            <i class="feedback">"Fantastic mocha flavour. Fresh and aromatic. Quick shipping!"</i>
+                        </li>
+                            <li class="testimonial swiper-slide">
+                            <img src="./user-4.jpg" alt="User" class="user-image">
+                            <h3 class="name">Aima Haris</h3>
+                            <i class="feedback">"Excellent quantity! Fresh beans and quick delievery.Highly recommend."</i>
+                        </li>
+                            <li class="testimonial swiper-slide">
+                            <img src="./user-5.jpg" alt="User" class="user-image">
+                            <h3 class="name">Arish khan</h3>
+                            <i class="feedback">"Best decaf! I've tried! Smooth andflavourful.Arrived promptly."</i>
+                        </li>
+                    </ul>
+                    <div class="swiper-pagination"></div>
+                     <div class="swiper-slide-button swiper-button-prev"></div>
+                     <div class="swiper-slide-button swiper-button-next"></div>
+                </div>
+            </div>
+        </div>
+        </section>
+            <!--Gallery section-->
+        <section class="gallery-section" id="gallery">
+            <h2 class="section-title">Gallery</h2>
+            <div class="section-content">
+                <ul class="gallery-list">
+                    <li class="gallery-item"><img src="./gallery-1.jpg" alt="Gallery" class="gallery-image"></li>
+                    <li class="gallery-item"><img src="./gallery-2.jpg" alt="Gallery" class="gallery-image"></li>
+                    <li class="gallery-item"><img src="./gallery-3.jpg" alt="Gallery" class="gallery-image"></li>
+                    <li class="gallery-item"><img src="./gallery-4.jpg" alt="Gallery" class="gallery-image"></li>
+                    <li class="gallery-item"><img src="./gallery-5.jpg" alt="Gallery" class="gallery-image"></li>
+                    <li class="gallery-item"><img src="./gallery-6.jpg" alt="Gallery" class="gallery-image"></li>
+                </ul>
+            </div>
+        </section>
+        <!--Contact Section-->
+        <section class="contact-section" id="contact">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="section-content">
+                <ul class="contact-info-list">
+                    <li class="contact-info"><i class="fa-solid fa-location-crosshairs"></i><p>Block 7, Roomy Signature Hotel, Super Market, Agha Khan Rd, F-6 Markaz, Islamabad</p></li>
+                    <li class="contact-info"><i class="fa-regular fa-envelope"></i><p>info@coffeeshopwebsite.com</p></li>
+                    <li class="contact-info"><i class="fa-solid fa-phone"></i><p>+92 135531286</p></li>
+                    <li class="contact-info"><i class="fa-regular fa-clock"></i><p>Monday - Friday: 9:00 AM - 5:00 PM</p></li>
+                    <li class="contact-info"><i class="fa-regular fa-clock"></i><p>Saturday: 10:00 AM - 3:00 PM</p></li>
+                    <li class="contact-info"><i class="fa-solid fa-clock"></i><p>Sunday: Closed</p></li>
+                    <li class="contact-info"><i class="fa-solid fa-globe"></i><p>www.coffeeshop.com.pk</p></li>
+                </ul>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.678!2d73.0479!3d33.6844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbfbf7b7b7b7b%3A0x123456789abcdef!2sIslamabad!5e0!3m2!1sen!2s!4v1700000000000" width="100%" height="300" style="border:0; border-radius:10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <form action="#" class="contact-form">
+                <input type="text" placeholder="Your name...." class="form-input" required>
+                <input type="email" placeholder="Your email...." class="form-input" required>
+                 <textarea placeholder="Your message...." class="form-input" required></textarea>
+                <button class="submit-button">Submit</button>
+                </form>
+            </div>
+        </section>
+        <footer class="footer-section">
+        <div class="section-content">
+            <p class="copyright-text">@ 2026 Coffee Shop</p>
+             <div class="social-link-list">
+                    <a href="#" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+                   <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                  <a href="#" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+                <p class="policy-text"><a href="#" class="policy-link">Privacy Policy</a></p>
+                <span class="separator">.</span>
+                  <a href="#" class="policy-link">Refund Policy</a>
+        </div>
+    </footer>
+    </main>
+    <!--link swipper with js-->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+    <!-- Cart functionality script -->
+    <script src="cart.js"></script>
+</body>
+</html>

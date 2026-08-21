@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel - Messages</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<h2>☕ Coffee Shop Admin Dashboard</h2>
+<div class="cards">
+
+    <div class="card">
+        <h3>Total Orders</h3>
+        <h1 id="total-orders">0</h1>
+    </div>
+
+    <div class="card">
+        <h3>Total Users</h3>
+        <h1 id="total-users">0</h1>
+    </div>
+
+    <div class="card">
+        <h3>Messages</h3>
+        <h1 id="total-messages">0</h1>
+    </div>
+
+</div>
+
+<h2>Contact Messages</h2>
+<div id="error" class="error"></div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+        </tr>
+    </thead>
+
+    <tbody id="data"></tbody>
+</table>
+<hr style="margin:50px 0;">
+
+<h2>Manage Orders</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+
+    <tbody id="orders-data">
+
+    </tbody>
+
+</table>
+
+<hr style="margin:50px 0;">
+<h2>Add New Product</h2>
+
+<form id="product-form">
+
+    <input
+        type="text"
+        id="product-name"
+        placeholder="Product Name"
+        required
+    >
+
+    <input
+        type="text"
+        id="product-description"
+        placeholder="Description"
+        required
+    >
+
+    <input
+        type="number"
+        id="product-price"
+        step="0.01"
+        placeholder="Price"
+        required
+    >
+
+    <input
+        type="text"
+        id="product-image"
+        placeholder="Image Path (example: ./coffee.png)"
+        required
+    >
+
+    <input
+        type="text"
+        id="product-category"
+        placeholder="Category"
+        required
+    >
+
+    <button type="submit">
+        Add Product
+    </button>
+
+</form>
+
+<hr style="margin:40px 0;">
+
+<h2>Manage Products</h2>
+
+<table>
+
+    <thead>
+
+        <tr>
+
+            <th>ID</th>
+
+            <th>Image</th>
+
+            <th>Name</th>
+
+            <th>Category</th>
+
+            <th>Price</th>
+
+            <th>Action</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody id="products-data">
+
+    </tbody>
+
+</table>
+<script src="admin.js">
+
+</script>
+
+</body>
+</html>

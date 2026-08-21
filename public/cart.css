@@ -1,0 +1,330 @@
+
+/* ===================================================
+   RESET
+=================================================== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+    text-decoration: none;
+}
+
+body{
+    background:#f8f5f2;
+}
+
+/* ===================================================
+   NAVBAR
+=================================================== */
+
+header{
+    width:100%;
+    background:#3b141c;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:1000;
+}
+
+.navbar{
+    max-width:1300px;
+    margin:auto;
+    height:80px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 30px;
+}
+
+.logo-text{
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.back-btn{
+    color:white;
+    text-decoration:none;
+    background:#f3961c;
+    padding:10px 20px;
+    border-radius:30px;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    background:white;
+    color:#3b141c;
+}
+
+/* ===================================================
+   MAIN CART SECTION
+=================================================== */
+
+.cart-container{
+
+    max-width:1200px;
+    margin:130px auto 50px;
+    padding:25px;
+
+    background:white;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+
+}
+
+.cart-title{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    color:#3b141c;
+
+    font-size:34px;
+
+}
+
+/* ===================================================
+   TABLE
+=================================================== */
+
+.cart-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+th{
+
+    background:#3b141c;
+
+    color:white;
+
+    padding:15px;
+
+}
+
+td{
+
+    padding:15px;
+
+    text-align:center;
+
+    border-bottom:1px solid #ddd;
+
+}
+
+tr:hover{
+
+    background:#fafafa;
+
+}
+
+/* ===================================================
+   QUANTITY BUTTONS
+=================================================== */
+
+.qty-btn{
+
+    width:35px;
+
+    height:35px;
+
+    border:none;
+
+    background:#f3961c;
+
+    color:white;
+
+    font-size:18px;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.qty-btn:hover{
+
+    background:#3b141c;
+
+}
+
+.quantity{
+
+    margin:0 10px;
+
+    font-weight:bold;
+
+}
+
+/* ===================================================
+   REMOVE BUTTON
+=================================================== */
+
+.remove-btn{
+
+    padding:8px 15px;
+
+    border:none;
+
+    background:#dc3545;
+
+    color:white;
+
+    border-radius:20px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.remove-btn:hover{
+
+    background:#b52b38;
+
+}
+
+/* ===================================================
+   TOTAL SECTION
+=================================================== */
+
+.cart-summary{
+
+    margin-top:30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+}
+
+.total{
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    color:#3b141c;
+
+}
+
+/* ===================================================
+   BUTTONS
+=================================================== */
+
+.cart-buttons{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+.clear-btn,
+
+.checkout-btn{
+
+    padding:12px 25px;
+
+    border:none;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.clear-btn{
+
+    background:#dc3545;
+
+    color:white;
+
+}
+
+.clear-btn:hover{
+
+    background:#b52b38;
+
+}
+
+.checkout-btn{
+
+    background:#f3961c;
+
+    color:white;
+
+}
+
+.checkout-btn:hover{
+
+    background:#3b141c;
+
+}
+
+/* ===================================================
+   EMPTY CART
+=================================================== */
+
+.empty-cart{
+
+    text-align:center;
+
+    font-size:24px;
+
+    color:#777;
+
+    padding:50px;
+
+}
+
+/* ===================================================
+   RESPONSIVE
+=================================================== */
+
+@media(max-width:768px){
+
+table{
+
+    font-size:14px;
+
+}
+
+.cart-summary{
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.cart-buttons{
+
+    width:100%;
+
+    justify-content:center;
+
+}
+
+}

@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In & Sign Up Form</title>
+    
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="loginformstyle.css">
+    
+    <!-- Google Fonts (Poppins) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Toast Notification -->
+    <div id="toast"></div>
+
+    <!-- Dark Mode Button -->
+    <button id="themeToggle">
+        <i class="fa-solid fa-moon"></i>
+    </button>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="form-box">
+            
+            <!-- Form Title -->
+            <h1 class="title">Sign Up</h1>
+            <div class="underline"></div>
+            <p class="text" style="display:none;"></p>
+
+            <!-- Auth Form -->
+            <form id="authForm" onsubmit="return false;">
+                
+                <!-- Input Groups Section -->
+                <div class="input-group">
+
+                    <!-- 1. Full Name Field (Sign Up Only) -->
+                    <div class="input-field namefield">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="name" placeholder="Full Name">
+                        <small id="nameError" class="error"></small>
+                    </div>
+
+                    <!-- 2. Email Address Field -->
+                    <div class="input-field">
+                        <i class="fa-solid fa-at"></i>
+                        <input type="email" id="email" placeholder="Email Address">
+                    </div>
+
+                    <!-- 3. Password Field -->
+                    <div class="input-field">
+                        <i class="fa-solid fa-key"></i>
+                        <input type="password" id="password" placeholder="Password">
+                        
+                        <!-- Password Strength -->
+                        <div class="strength-container">
+                            <div id="strengthBar"></div>
+                        </div>
+                        <p id="strengthText"></p>
+                        
+                        <!-- Toggle Password Icon -->
+                        <i class="fa-solid fa-eye togglePassword"></i>
+                        <small id="passwordError" class="error"></small>
+                    </div>
+
+                    <!-- 4. Confirm Password Field (Sign Up Only) -->
+                    <div class="input-field confirmPasswordField">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="confirmPassword" placeholder="Confirm Password">
+                        <!-- Toggle Confirm Password Icon -->
+                        <i class="fa-solid fa-eye toggleConfirmPassword"></i>
+                        <small id="confirmPasswordError" class="error"></small>
+                    </div>
+                    
+                    <!-- Remember Me -->
+                    <div class="remember-box">
+                        <label>
+                            <input type="checkbox" id="rememberMe">
+                            Remember Me
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Mode Switch Buttons (Sign up / Sign in tabs) -->
+                <div class="btn-field">
+                    <button type="button" class="SignUpBtn">Sign up</button>
+                    <button type="button" class="disable SignInBtn">Sign in</button>
+                </div>
+
+                <!-- Final Action Submit Button -->
+                <div class="submit-field">
+                    <button type="button" class="SubmitBtn">
+                        <span class="btnText">Submit</span>
+                        <span class="loader"></span>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    
+    <!-- JavaScript File Linking -->
+    <script src="loginform.js"></script> 
+</body>
+</html>
