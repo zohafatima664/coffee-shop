@@ -98,9 +98,11 @@ app.post("/signup", (req, res) => {
     db.query(checkSql, [email], (err, result) => {
 
         if (err) {
+            console.log("Signup Check Error:", err);
             return res.status(500).json({
                 success: false,
-                message: "Database Error"
+                message: "Database Error",
+                error: err.message
             });
         }
 
