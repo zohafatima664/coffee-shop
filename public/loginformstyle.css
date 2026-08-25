@@ -461,3 +461,72 @@ body.dark p{
 color:white;
 
 }
+/* ================= Mobile Responsiveness Fix ================= */
+@media (max-width: 480px) {
+    .container {
+        padding: 15px; /* Choti screens par sides se thori padding dein */
+    }
+
+    .form-box {
+        width: 100% !important;
+        min-width: unset !important; /* 350px ki limit ko khatam kar dega taake chote phone par fit aa jaye */
+        max-width: 100% !important;
+        padding: 20px 15px; /* Andr ki padding thori kam kar di hai taake jagah bache */
+    }
+
+    .form-box h1 {
+        font-size: 24px; /* Heading ka size mobile ke liye thora chota kiya hai */
+    }
+
+    #themeToggle {
+        top: 10px;
+        right: 10px;
+        width: 38px;
+        height: 38px;
+        font-size: 15px;
+    }
+
+    #toast {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        text-align: center;
+    }
+}
+/* ================= Mobile Screen Perfect Fit Fix ================= */
+@media (max-width: 576px) {
+    .container {
+        padding: 10px;
+    }
+
+    .form-box {
+        width: 92% !important;        /* Screen ke dono taraf thori jagah chhore ga */
+        min-width: unset !important;  /* 350px ki limit khatam */
+        max-width: 400px !important;
+        padding: 18px 12px !important; /* Andr ki padding kam kar di hai taake chota lage */
+    }
+
+    .form-box h1 {
+        font-size: 24px !important;    /* Heading ka size chota ho jaye ga */
+    }
+
+    .form-box .underline {
+        margin: 8px auto 20px auto !important;
+    }
+
+    .input-field {
+        margin: 10px 0 !important;    /* Input fields ke darmiyan ka fasla kam kiya */
+        max-height: 50px !important;  /* Inputs ki height thori kam ki */
+    }
+
+    .input-field input {
+        padding: 12px 10px !important; /* Input text ki padding choti ki */
+        font-size: 14px;
+    }
+
+    .submit-field button, 
+    .btn-field button {
+        height: 38px !important;      /* Buttons ko bhi compact kar diya */
+        font-size: 14px;
+    }
+}

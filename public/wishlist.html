@@ -122,137 +122,88 @@
     </div>
 
 
-    <script>
+ <script>
+    function loadWishlist() {
+        const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        const container = document.getElementById("wishlist-items");
 
-        function loadWishlist() {
+        container.innerHTML = "";
 
-            const wishlist =
-                JSON.parse(localStorage.getItem("wishlist")) || [];
+        if (wishlist.length === 0) {
+            container.innerHTML = `
+                <div class="empty">
+                    ❤️ Your wishlist is empty
+                    <br><br>
+                    Add some delicious coffee!
+                </div>
+            `;
+            return;
+        }
 
-            const container =
-                document.getElementById("wishlist-items");
-
-            container.innerHTML = "";
-
-            if (wishlist.length === 0) {
-
-                container.innerHTML = `
-                    <div class="empty">
-                        ❤️ Your wishlist is empty
-                        <br><br>
-                        Add some delicious coffee!
+        wishlist.forEach((product, index) => {
+            container.innerHTML += `
+                <div class="wishlist-card">
+                    <h3>${product.name}</h3>
+                    <div class="price">
+                        $${Number(product.price).toFixed(2)}
                     </div>
-                `;
+                    <button class="cart-btn" onclick="addToCart('${product.name}', ${product.price})">
+                        🛒 Add to Cart
+                    </button>
+                    <button class="remove-btn" onclick="removeFromWishlist(${index})">
+                        ♥ Remove
+                    </button>
+                </div>
+            `;
+        });
+    }
 
-                return;
-            }
+    function removeFromWishlist(index) {
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        wishlist.splice(index, 1);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        loadWishlist();
+    }
 
-            wishlist.forEach((product, index) => {
+    async function addToCart(name, price) {
+        const user = JSON.parse(localStorage.getItem("user"));
 
-                container.innerHTML += `
+        if (!user || !user.id) {
+            alert("Please login first.");
+            window.location.href = "loginpage.html";
+            return;
+        }
 
-                    <div class="wishlist-card">
-
-                        <h3>${product.name}</h3>
-
-                        <div class="price">
-                            $${Number(product.price).toFixed(2)}
-                        </div>
-
-                        <button
-                            class="cart-btn"
-                            onclick="addToCart('${product.name}', ${product.price})">
-                            🛒 Add to Cart
-                        </button>
-
-                        <button
-                            class="remove-btn"
-                            onclick="removeFromWishlist(${index})">
-                            ♥ Remove
-                        </button>
-
-                    </div>
-
-                `;
-
+        try {
+            // 🌟 Yahan Vercel link ki jagah relative URL use kiya hai
+            const response = await fetch("/cart", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: user.id,
+                    product_name: name,
+                    price: Number(price),
+                    quantity: 1
+                })
             });
 
+            const data = await response.json();
+
+            if (data.success) {
+                alert(name + " Added To Cart 🛒");
+            } else {
+                alert(data.message || "Unable to add product");
+            }
+        } catch (err) {
+            console.log(err);
+            alert("Error adding product to cart");
         }
-
-
-        function removeFromWishlist(index) {
-
-            let wishlist =
-                JSON.parse(localStorage.getItem("wishlist")) || [];
-
-            wishlist.splice(index, 1);
-
-            localStorage.setItem(
-                "wishlist",
-                JSON.stringify(wishlist)
-            );
-
-            loadWishlist();
-
-        }
-
-         async function addToCart(name, price) {
-
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (!user || !user.id) {
-        alert("Please login first.");
-        return;
     }
 
-    try {
-
-        const response = await fetch("[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/cart", {
-
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-                user_id: user.id,
-                product_name: name,
-                price: Number(price),
-                quantity: 1
-            })
-
-        });
-
-        const data = await response.json();
-
-        console.log(data);
-
-        if (data.success) {
-
-            alert(name + " Added To Cart 🛒");
-
-        } else {
-
-            alert(data.message || "Unable to add product");
-
-        }
-
-    } catch (err) {
-
-        console.log(err);
-
-        alert("Error adding product to cart");
-
-    }
-
-}
-       
-
-
-        loadWishlist();
-
-    </script>
+    loadWishlist();
+</script>
 
 </body>
 

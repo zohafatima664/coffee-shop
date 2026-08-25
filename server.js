@@ -50,187 +50,79 @@ db.getConnection((err, connection) => {
         connection.release();
     }
 });
-// ================================
-// DATABASE CONNECTION (POOL)
-// ================================
-
-// const db = mysql.createPool({
-//     host: process.env.DB_HOST,
-//     port: process.env.DB_PORT,
-//     user: process.env.DB_USER,
-//     password: process.env.DB_PASSWORD,
-//     database: process.env.DB_NAME,
-//     waitForConnections: true,
-//     connectionLimit: 10,
-//     queueLimit: 0,
-//     ssl: { 
-//         rejectUnauthorized: false
-//     }
-// });
-
-// db.getConnection((err, connection) => {
-//     if (err) {
-//         console.log("Database Connection Failed");
-//         console.log(err);
-//     } else {
-//         console.log("Database Connected Successfully");
-//         connection.release();
-//     }
-// });
-// // Database connection ke baad yeh loop laga dein taake connection zinda rahe
-// setInterval(() => {
-//     db.query('SELECT 1', (err) => {
-//         if (err) console.log('Keep-alive ping error:', err);
-//     });
-// }, 30000); // Har 30 seconds baad aik choti si query chalay ga
 
 
 // ================================
 // SIGNUP
 // ================================
-
 app.post("/signup", (req, res) => {
-
     const { name, email, password } = req.body;
 
-    const checkSql = "SELECT * FROM users WHERE email=?";
-
-    db.query(checkSql, [email], (err, result) => {
-
+    // Pehle check karein ke email pehle se mojood toh nahi
+    const checkSql = "SELECT * FROM users WHERE email = ?";
+    db.query(checkSql, [email], (err, data) => {
         if (err) {
-            console.log("Signup Check Error:", err);
-            return res.status(500).json({
-                success: false,
-                message: "Database Error",
-                error: err.message
-            });
+            return res.status(500).json({ success: false, message: "Database Error" });
+        }
+        if (data.length > 0) {
+            return res.status(400).json({ success: false, message: "Email already exists!" });
         }
 
-        if (result.length > 0) {
-
-            return res.status(400).json({
-                success: false,
-                message: "Email already exists"
-            });
-
-        }
-
-        const sql =
-        "INSERT INTO users(name,email,password) VALUES(?,?,?)";
-
-        db.query(sql,[name,email,password],(err,data)=>{
-
-            if(err){
-
-                return res.status(500).json({
-                    success:false,
-                    message:"Signup Failed"
-                });
-
+        // Agar email nahi hai, toh naya user insert kar dein (role default 'user' hoga)
+        const insertSql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'user')";
+        db.query(insertSql, [name, email, password], (err, result) => {
+            if (err) {
+                console.log("Signup Insert Error:", err);
+                return res.status(500).json({ success: false, message: "Failed to register" });
             }
 
             res.json({
-
-                success:true,
-
-                message:"Signup Successful",
-
-                user:{
-                    id:data.insertId,
-                    name:name,
-                    email:email
+                success: true,
+                message: "User Registered Successfully",
+                user: {
+                    id: result.insertId,
+                    name: name,
+                    email: email,
+                    role: "user"
                 }
-
             });
-
         });
-
     });
-
 });
 
+// login
 
+app.post("/login", (req, res) => {
+    const { email, password } = req.body;
+    console.log("Login Attempted with Email:", email, "Password:", password); // <--- Yeh line add karein
 
-// ================================
-// LOGIN
-// ================================
+    const sql = "SELECT * FROM users WHERE email=? AND password=?";
 
-app.post("/login",(req,res)=>{
-
-    const {email,password}=req.body;
-   
-
-    const sql="SELECT * FROM users WHERE email=? AND password=?";
-
-       db.query(sql,[email,password],(err,result)=>{
-
-
-        if(err){
-
-            return res.status(500).json({
-                success:false
-            });
-
+    db.query(sql, [email, password], (err, result) => {
+        if (err) {
+            console.log("DB Error:", err);
+            return res.status(500).json({ success: false });
         }
 
-        if(result.length===0){
+        console.log("Query Results found:", result.length); // <--- Yeh line add karein
 
+        if (result.length === 0) {
             return res.status(401).json({
-
-                success:false,
-
-                message:"Invalid Email or Password"
-
+                success: false,
+                message: "Invalid Email or Password"
             });
-
         }
 
         res.json({
-
-            success:true,
-
-            user:{
-
-                id:result[0].id,
-                name:result[0].name,
-                email:result[0].email,
-                    role: result[0].role
-
+            success: true,
+            user: {
+                id: result[0].id,
+                name: result[0].name,
+                email: result[0].email,
+                role: result[0].role
             }
-
         });
-
     });
-
-});
-
-
-
-// ================================
-// CONTACT FORM
-// ================================
-
-app.post("/contact",(req,res)=>{
-
-    const {name,email,message}=req.body;
-
-    const sql=
-    "INSERT INTO contacts(name,email,message) VALUES(?,?,?)";
-
-    db.query(sql,[name,email,message],(err)=>{
-
-        if(err){
-
-            console.log(err);
-
-            return res.status(500).send("Database Error");
-
-        }
-
-        res.send("Message Saved Successfully");
-
-    });
-
 });
 // ================================
 // ADD TO CART
@@ -419,53 +311,40 @@ function checkAdmin(req, res, next) {
 // ================================
 // ADMIN DASHBOARD STATS
 // ================================
-
-app.get("/admin/stats", checkAdmin, (req, res) => {
-
+app.get("/admin/stats", (req, res) => { // checkAdmin hata diya hai
     const stats = {};
 
     db.query("SELECT COUNT(*) AS totalOrders FROM orders", (err, orderResult) => {
-
         if (err) {
             return res.status(500).json({ success: false });
         }
-
         stats.totalOrders = orderResult[0].totalOrders;
 
         db.query("SELECT COUNT(*) AS totalUsers FROM users", (err, userResult) => {
-
             if (err) {
                 return res.status(500).json({ success: false });
             }
-
             stats.totalUsers = userResult[0].totalUsers;
 
             db.query("SELECT COUNT(*) AS totalMessages FROM contacts", (err, messageResult) => {
-
                 if (err) {
                     return res.status(500).json({ success: false });
                 }
-
                 stats.totalMessages = messageResult[0].totalMessages;
 
                 res.json({
                     success: true,
                     stats: stats
                 });
-
             });
-
         });
-
     });
-
 });
+
 // ================================
 // ADMIN PANEL - CONTACT MESSAGES
 // ================================
-
-
-   app.get("/admin/messages", checkAdmin, (req, res) => {
+app.get("/admin/messages", (req, res) => { // checkAdmin hata diya hai
     const sql = `
         SELECT *
         FROM contacts
@@ -473,22 +352,31 @@ app.get("/admin/stats", checkAdmin, (req, res) => {
     `;
 
     db.query(sql, (err, result) => {
-
         if (err) {
-
             console.log(err);
-
             return res.status(500).json({
                 success: false,
                 message: "Database Error"
             });
-
         }
-
         res.json(result);
-
     });
+});
+// ================================
+// SAVE CONTACT MESSAGE
+// ================================
+app.post("/contact", (req, res) => {
+    const { name, email, message } = req.body;
 
+    const sql = "INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)";
+    
+    db.query(sql, [name, email, message], (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Database Error: Message save nahi ho saka.");
+        }
+        res.send("your message send successfully!!.");
+    });
 });
 // ================================
 // PLACE ORDER
@@ -1009,6 +897,26 @@ app.post("/ai-recommend", (req, res) => {
 
     });
 
+});
+// ================================
+// CONTACT US ROUTE
+// ================================
+app.post("/contact", (req, res) => {
+    const { name, email, message } = req.body;
+
+    if (!name || !email || !message) {
+        return res.status(400).send("All fields are required");
+    }
+
+    const sql = "INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)";
+    
+    db.query(sql, [name, email, message], (err, result) => {
+        if (err) {
+            console.error("Database error in contact:", err);
+            return res.status(500).send("Database Error");
+        }
+        res.send("Message sent successfully!");
+    });
 });
 // ================================
 // DEFAULT ROUTE

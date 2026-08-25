@@ -1473,3 +1473,106 @@ transform:scale(1.05);
 .cart-icon {
     flex-shrink: 0;
 }
+/* =====================================
+   MOBILE RESPONSIVENESS & FIXES (Zoya's Fix)
+===================================== */
+
+@media screen and (max-width: 900px) {
+    /* Navbar aur Menu ko mobile par fix karna */
+    header .navbar {
+        padding: 12px 15px;
+    }
+
+    .navbar .nav-menu {
+        position: fixed;
+        left: -100% !important;
+        top: 0;
+        width: 280px;
+        height: 100vh;
+        background: var(--white-color);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 20px 20px 20px;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+        z-index: 1000;
+        transition: left 0.3s ease-in-out;
+        overflow-y: auto;
+    }
+
+    /* Jab menu open ho toh screen par nazar aaye */
+    body.show-mobile-menu .navbar .nav-menu {
+        left: 0 !important;
+    }
+
+    .navbar .nav-menu .nav-link, 
+    .navbar .nav-menu a {
+        color: var(--dark-color) !important;
+        font-size: 1.1rem;
+        padding: 12px 15px;
+        width: 100%;
+        border-radius: 8px;
+        margin-top: 5px;
+    }
+
+    .navbar .nav-menu .nav-link:hover {
+        background: var(--light--pink-color);
+        color: var(--primary-color) !important;
+    }
+
+    /* Cart aur Logout/Admin buttons ko mobile mein saaf dikhane ke liye */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .cart-icon {
+        font-size: 24px;
+        margin-left: 10px;
+    }
+
+    #menu-open-button {
+        display: block !important;
+        font-size: 26px;
+        cursor: pointer;
+        color: var(--white-color);
+    }
+}
+
+/* =====================================
+   AI ASSISTANT MOBILE FIX
+===================================== */
+@media screen and (max-width: 600px) {
+    .ai-assistant-card {
+        padding: 20px 15px !important;
+        border-radius: 15px;
+    }
+
+    .ai-input-wrapper {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    #ai-question {
+        width: 100% !important;
+        height: 48px !important;
+        font-size: 15px !important;
+    }
+
+    #ai-btn {
+        width: 100% !important;
+        height: 48px !important;
+        font-size: 15px !important;
+    }
+
+    .ai-suggestion-btn {
+        font-size: 12px !important;
+        padding: 7px 10px !important;
+        margin: 3px !important;
+    }
+
+    #ai-response {
+        font-size: 14px !important;
+        padding: 12px 15px !important;
+    }
+}

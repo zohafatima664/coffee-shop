@@ -18,7 +18,7 @@ function loadCartData() {
     }
 
     // Server se is user ka cart data mangwana
-    fetch(`[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/cart/${user.id}`)
+     fetch(`/cart/${user.id}`)
     .then(res => res.json())
     .then(data => {
         if (data.success) {
@@ -98,9 +98,9 @@ if (clearBtn) {
 
         try {
 
-            const response = await fetch(`[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/cart/${user.id}`, {
-                method: "DELETE"
-            });
+          const response = await fetch(`/cart/${user.id}`, {
+    method: "DELETE"
+});
 
             const data = await response.json();
 
@@ -139,7 +139,7 @@ if (clearBtn) {
    REMOVE SINGLE ITEM FROM DATABASE
 ====================================================== */
 function removeDbItem(cartId) {
-    fetch(`[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/cart-item/${cartId}`, {
+    fetch(`/cart-item/${cartId}`, {
         method: "DELETE"
     })
     .then(res => res.json())

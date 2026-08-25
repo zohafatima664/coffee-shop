@@ -1,11 +1,11 @@
 document.getElementById("checkout-form").addEventListener("submit", async (e) => {
-
     e.preventDefault();
 
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (!user || !user.id) {
         alert("Please Login First");
+        window.location.href = "loginpage.html";
         return;
     }
 
@@ -14,73 +14,60 @@ document.getElementById("checkout-form").addEventListener("submit", async (e) =>
     const address = document.getElementById("customer-address").value;
 
     try {
-
-        // Cart data server se lo
-        const cartResponse = await fetch(`[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/cart/${user.id}`);
+        // 🌟 Relative URL use kiya hai taake local server par theek chale
+        const cartResponse = await fetch(`/cart/${user.id}`);
         const cartData = await cartResponse.json();
 
-        if (!cartData.success || cartData.cart.length === 0) {
+        if (!cartData.success || !cartData.cart || cartData.cart.length === 0) {
             alert("Your cart is empty!");
             return;
         }
 
         // Grand Total calculate karo
         let total = 0;
-
         cartData.cart.forEach(item => {
-            total += Number(item.price) * item.quantity;
+            total += Number(item.price) * (item.quantity || 1);
         });
 
-        // Order save karo
-        const orderResponse = await fetch("[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/place-order", {
-
+        // Order save karo (Relative URL)
+        const orderResponse = await fetch("/place-order", {
             method: "POST",
-
             headers: {
                 "Content-Type": "application/json"
             },
-
             body: JSON.stringify({
-
                 user_id: user.id,
                 customer_name,
                 phone,
                 address,
                 total
-
             })
-
         });
 
         const orderData = await orderResponse.json();
 
         if (orderData.success) {
+            // Order save hone ke baad cart clear karo
+            await fetch(`/cart/${user.id}`, {
+                method: "DELETE"
+            });
 
-        // Order save hone ke baad cart clear karo
-await fetch(`[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/cart/${user.id}`, {
-    method: "DELETE"
-});
+            // LocalStorage bhi clear
+            localStorage.removeItem("cart");
 
-// LocalStorage bhi clear
-localStorage.removeItem("cart");
-
-         // Success message show karo
-document.getElementById("checkout-form").style.display = "none";
-
-document.getElementById("order-success").style.display = "block";
+            // Success message show karo
+            const formElem = document.getElementById("checkout-form");
+            const successElem = document.getElementById("order-success");
+            
+            if (formElem) formElem.style.display = "none";
+            if (successElem) successElem.style.display = "block";
 
         } else {
-
-            alert(orderData.message);
-
+            alert(orderData.message || "Failed to place order");
         }
 
     } catch (err) {
-
-        console.error(err);
-
+        console.error("Checkout error:", err);
         alert("Server Error");
-
     }
-
 });

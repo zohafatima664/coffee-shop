@@ -217,3 +217,71 @@
     background:#0b5ed7;
 
 }
+/* ===================================================
+   ADMIN PAGE MOBILE RESPONSIVENESS FIX (Zoya's Fix)
+=================================================== */
+
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    /* Cards section ko mobile par adjust karna */
+    .cards {
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .card {
+        width: 100% !important;
+        max-width: 100%;
+        padding: 18px;
+    }
+
+    .card h1 {
+        font-size: 32px;
+    }
+
+    /* Add Product Form ko mobile par vertical (stacked) karna */
+    #product-form {
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+        margin: 20px 0;
+    }
+
+    #product-form input {
+        width: 100% !important; /* Inputs mobile ki screen par 100% width le lenge */
+    }
+
+    #product-form button {
+        width: 100%;
+        padding: 12px;
+    }
+
+    /* Table ko scrollable banana taake data hide ya overflow na ho */
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    th, td {
+        padding: 10px 8px;
+        font-size: 13px;
+    }
+
+    /* Status dropdown aur action buttons ki sizing */
+    .status-select {
+        min-width: 110px;
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+
+    .edit-btn, .delete-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+        margin-right: 4px;
+    }
+}

@@ -54,12 +54,13 @@ if (form) {
         const name = nameInput.value;
         const email = emailInput.value;
         const message = messageInput.value;
-
-        fetch("[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/contact", {
+          // 🌟 Yahan Vercel link hata kar relative URL lagayein:
+        fetch("/contact", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, message })
         })
+     
         .then(res => res.text())
         .then(data => {
             alert(data);
@@ -71,145 +72,89 @@ if (form) {
 
 // Cart Functionality
 /* ======================================================
-   CART COUNT UPDATE FUNCTION (Server aur LocalStorage Sync)
+   CART COUNT UPDATE FUNCTION
 ====================================================== */
 function updateCartIcon() {
     const user = JSON.parse(localStorage.getItem("user"));
-    const cartCountElem = document.getElementById("cart-count");
-
-    if (!cartCountElem) return;
-
-    if (user && user.id) {
-        // Agar user login hai toh server se latest count lay kar aayein
-        fetch(`[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/cart/${user.id}`)
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                let total = data.cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-                cartCountElem.innerText = total;
-                // LocalStorage ko bhi update rakhein
-                localStorage.setItem("cart", JSON.stringify(data.cart));
-            }
-        })
-        .catch(err => console.error("Error fetching cart:", err));
-    } else {
-        // Fallback to LocalStorage
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        let total = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-        cartCountElem.innerText = total;
-    }
-}
-
-/* Page Load par count update karein */
-
-function updateCartIcon() {
-
-    const user = JSON.parse(localStorage.getItem("user"));
-
     const cartCountElem = document.getElementById("cart-count");
 
     if (!cartCountElem) return;
 
     if (!user || !user.id) {
-
         cartCountElem.innerText = "0";
-
         return;
-
     }
 
-    fetch(`[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/cart/${user.id}`)
-
+    // Relative URL use karein taake local aur live dono par chale
+    fetch(`/cart/${user.id}`)
     .then(res => res.json())
-
     .then(data => {
-
         if(data.success){
-
             let total = 0;
-
-            data.cart.forEach(item=>{
-
-                total += item.quantity;
-
+            data.cart.forEach(item => {
+                total += (item.quantity || 1);
             });
-
             cartCountElem.innerText = total;
-
         }
-
     })
-
-    .catch(err=>{
-
-        console.log(err);
-
+    .catch(err => {
+        console.log("Error fetching cart count:", err);
     });
-
 }
+
+// Page load hotay hi count update ho jaye
+document.addEventListener("DOMContentLoaded", () => {
+    updateCartIcon();
+});
+
 /* ======================================================
    ADD TO CART LOGIC
 ====================================================== */
-
 const buttons = document.querySelectorAll(".add-cart-btn");
 
 buttons.forEach(button => {
-
     button.addEventListener("click", async (e) => {
-
         e.preventDefault();
 
         const user = JSON.parse(localStorage.getItem("user"));
 
         if (!user || !user.id) {
             alert("Please login first.");
+            window.location.href = "loginpage.html";
             return;
         }
 
         const productName = button.dataset.name;
         const productPrice = Number(button.dataset.price);
-        const productImage = button.dataset.image;
 
         try {
-
-            const response = await fetch("[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/cart", {
-
+            const response = await fetch("/cart", {
                 method: "POST",
-
                 headers: {
                     "Content-Type": "application/json"
                 },
-
                 body: JSON.stringify({
-
                     user_id: user.id,
                     product_name: productName,
                     price: productPrice,
                     quantity: 1
-
                 })
-
             });
 
             const data = await response.json();
+            if (data.success) {
+                alert("Product Added To Cart!");
+                
+                // 🌟 Yahan theek function call kiya hai taake foran count update ho!
+                updateCartIcon(); 
 
-            console.log(data);
-
-            // Server se latest count lao
-            updateCartIcon();
-
-            alert(productName + " Added To Cart");
-
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error("Error adding to cart:", error);
         }
-
-        catch(err){
-
-            console.log(err);
-
-        }
-
     });
-
 });
 /* ===========================
    LOGOUT
@@ -370,13 +315,11 @@ if (aiBtn) {
 
         try {
 
-            const response = await fetch(
-                "[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/ai-recommend",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+           const response = await fetch("/ai-recommend", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
                     body: JSON.stringify({
                         question: question
                     })
@@ -475,13 +418,11 @@ if (aiBtn) {
 
                     try {
 
-                        const cartResponse = await fetch(
-                            "[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/cart",
-                            {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/json"
-                                },
+                       const cartResponse = await fetch("/cart", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
                                 body: JSON.stringify({
 
                                     user_id: user.id,

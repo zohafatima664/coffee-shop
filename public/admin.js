@@ -1,3 +1,4 @@
+const API_URL = ""; // Kyunke aap local server par hain, toh yeh blank rahega
 async function loadDashboardStats() {
 
     try {
@@ -10,7 +11,7 @@ async function loadDashboardStats() {
         }
 
         const response = await fetch(
-            "[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/admin/stats",
+            "/admin/stats",
             {
                 headers: {
                     "user-id": user.id
@@ -54,7 +55,7 @@ if (!user || !user.id) {
     return;
 }
 
-let res = await fetch("[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/admin/messages", {
+let res = await fetch("/admin/messages", {
     headers: {
         "user-id": user.id
     }
@@ -109,7 +110,7 @@ if (!user || !user.id) {
     return;
 }
 
-const res = await fetch("[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/admin/orders", {
+const res = await fetch("/admin/orders", {
     headers: {
         "user-id": user.id
     }
@@ -179,7 +180,7 @@ const res = await fetch("[https://coffee-shop-s.vercel.app](https://coffee-shop-
 </td>
 
                     <td>
-                        ${new Date(order.order_date).toLocaleString()}
+                        ${new Date(order.created_at).toLocaleString()}
                     </td>
 
                 </tr>
@@ -199,21 +200,17 @@ const res = await fetch("[https://coffee-shop-s.vercel.app](https://coffee-shop-
 
 loadOrders();
 async function updateStatus(orderId, status) {
-
     try {
-
         const user = JSON.parse(localStorage.getItem("user"));
 
         const response = await fetch(
-            `[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/admin/order/${orderId}/status`,
+            `/admin/order-status/${orderId}`, // Yahan URL theek kar diya hai
             {
                 method: "PUT",
-
                 headers: {
                     "Content-Type": "application/json",
                     "user-id": user.id
                 },
-
                 body: JSON.stringify({
                     status: status
                 })
@@ -221,27 +218,17 @@ async function updateStatus(orderId, status) {
         );
 
         const data = await response.json();
-
         console.log("STATUS UPDATE:", data);
 
         if (data.success) {
-
             alert("✅ Order status updated!");
-
             loadOrders();
-
         } else {
-
             alert("❌ " + data.message);
-
         }
-
     } catch (err) {
-
         console.log(err);
-
         alert("❌ Error Updating Status");
-
     }
 }
 // =====================================
@@ -252,7 +239,7 @@ async function loadProducts() {
 
     try {
 
-        const response = await fetch("[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/admin/products");
+        const response = await fetch("/admin/products");
 
         const data = await response.json();
 
@@ -352,7 +339,7 @@ async function deleteProduct(productId) {
     try {
         const user = JSON.parse(localStorage.getItem("user"));
         const response = await fetch(
-            `[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/admin/product/${productId}`,
+            `/admin/product/${productId}`,
             {
                 method: "DELETE",
                    headers: {
@@ -396,7 +383,7 @@ async function editProduct(id, name, description, price, image, category){
     try{
 
         const response = await fetch(
-            `[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/admin/product/${id}`,
+            `/admin/product/${id}`,
             {
                 method:"PUT",
                 headers:{
@@ -459,7 +446,7 @@ productForm.addEventListener("submit", async (e) => {
     try {
 
         const response = await fetch(
-            "[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/admin/product",
+            "/admin/product",
             {
                 method: "POST",
 
@@ -498,7 +485,7 @@ async function updateStatus(orderId, status) {
         const user = JSON.parse(localStorage.getItem("user"));
 
         const response = await fetch(
-            `[https://coffee-shop-s.vercel.app](https://coffee-shop-s.vercel.app)/admin/order-status/${orderId}`,
+            `/admin/order-status/${orderId}`,
             {
                 method: "PUT",
 
@@ -537,3 +524,25 @@ async function updateStatus(orderId, status) {
 
     }
 }
+// =====================================
+// ADMIN LOGOUT FUNCTIONALITY
+// =====================================
+document.addEventListener("DOMContentLoaded", () => {
+    const logoutBtn = document.getElementById("logout-btn");
+
+    if (logoutBtn) {
+        // Ensure button is visible for logged-in admin
+        logoutBtn.style.display = "inline-block";
+
+        logoutBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            
+            // Clear user session from localStorage
+            localStorage.removeItem("user");
+            
+            // Redirect to login page
+            alert("Aap kamiyabi se logout ho gaye hain!");
+            window.location.href = "loginpage.html"; // Yahan apne login page ka sahi naam likhein
+        });
+    }
+});

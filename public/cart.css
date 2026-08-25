@@ -328,3 +328,85 @@ table{
 }
 
 }
+/* ===================================================
+   MOBILE RESPONSIVENESS FIX FOR CART PAGE
+=================================================== */
+
+@media (max-width: 768px) {
+    /* Navbar ko mobile par compact karna */
+    .navbar {
+        padding: 0 15px;
+        height: 70px;
+    }
+
+    .logo-text {
+        font-size: 22px;
+    }
+
+    .back-btn {
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+
+    /* Cart container ki spacing mobile ke liye */
+    .cart-container {
+        margin: 90px 10px 30px 10px;
+        padding: 15px 10px;
+        border-radius: 10px;
+    }
+
+    .cart-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    /* Table ko mobile-friendly scrollable banana taake overflow na ho */
+    .cart-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    th, td {
+        padding: 10px 8px;
+        font-size: 13px;
+    }
+
+    /* Quantity aur Remove buttons ko mobile par adjust karna */
+    .qty-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+
+    .remove-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    /* Summary section (Total & Buttons) */
+    .cart-summary {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .total {
+        font-size: 22px;
+    }
+
+    .cart-buttons {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .clear-btn,
+    .checkout-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 15px;
+    }
+}
